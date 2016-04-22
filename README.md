@@ -7,10 +7,7 @@ react와 webpack을 이용한 프로젝트
 
 ## Installation
 ```
-npm install --save-dev webpack babel-core babel-loader babel-preset-es2015 babel-preset-react json-loader style-loader css-loader postcss-loader autoprefixer less less-loader html-webpack-plugin extract-text-webpack-plugin
-```
-```
-npm install --save react react-dom
+npm install
 ```
 ## Development
 ```
