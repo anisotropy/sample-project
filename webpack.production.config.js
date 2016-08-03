@@ -11,8 +11,9 @@ module.exports = {
 	module: {
 		loaders: [
 			{ test: /\.json$/, loader: 'json' },
-			{ test: /\.js$/, exclude: /node_modules/, loader: 'babel' },
+			{ test: /\.js$/, exclude: /node_modules/, loader: 'babel', query: { presets: ['es2015','react'] }},
 			{ test: /\.less$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!less') }
+			{ test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!less') }
 		]
 	},
 	postcss: function(){
@@ -22,6 +23,10 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: __dirname + '/app/index.tmpl.html'
 		}),
+		new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        }),
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.optimize.UglifyJsPlugin(),
 		new ExtractTextPlugin('style.css')
