@@ -1,7 +1,5 @@
-import React, {createClass} from 'react';
-
-var Comment = createClass({
-	render(){
+var Comment = React.createClass({
+	render: function() {
 		return (
 			<div className='comment'>
 				<h2 className="commentAuthor">
@@ -13,4 +11,4 @@ var Comment = createClass({
 	}
 });
 
-export default Comment;
+module.exports = Comment;

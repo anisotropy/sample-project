@@ -1,11 +1,9 @@
-import $ from './contrib/jquery/jquery-2.2.1.min.js';
-import React from 'react';
-import ReactDom, {render} from 'react-dom';
-import CommentBox from './CommentBox';
+require('./style.less');
 
-import './style.less';
-
-render(
-	<CommentBox url="comments" pollInterval={2000} />,
-	document.getElementById('content')
+var CommentBox = require('./CommentBox.js');
+ReactDOM.render(
+	<CommentBox url="../api/comments" pollInterval={2000} />,
+	$('#content').get(0)
 );
+
+require('./script.js');

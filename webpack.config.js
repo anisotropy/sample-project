@@ -1,9 +1,10 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var config = require('./config.js');
 
 module.exports = {
 	devtool: 'eval-source-map',
-	entry: __dirname + '/app/content.js',
+	entry: config.entry,
 	output: {
 		path: __dirname + '/build',
 		filename: 'bundle.js'
@@ -11,9 +12,9 @@ module.exports = {
 	module: {
 		loaders: [
 			{ test: /\.json$/, loader: 'json' },
-			{ test: /\.js$/, exclude: /node_modules/, loader: 'babel', query: { presets: ['es2015','react'] }},
+			{ test: /\.js$/, exclude: /node_modules/, loader: 'babel', query: { presets: ['react'] }},
 			{ test: /\.less$/, loader: 'style-loader!css-loader!postcss-loader!less' },
-			{ test: /\.css$/, loader: 'style-loader!css-loader!postcss-loader!less' }
+			{ test: /\.css$/, loader: 'style-loader!css-loader!postcss-loader' }
 		]
 	},
 	postcss: function(){
@@ -23,9 +24,6 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: __dirname + '/app/index.tmpl.html'
 		}),
-		new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery"
-        })
+		new webpack.ProvidePlugin(config.globalModules)
 	]
 }

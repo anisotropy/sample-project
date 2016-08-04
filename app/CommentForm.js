@@ -1,16 +1,14 @@
-import React, {createClass} from 'react';
-
-var CommentForm = createClass({
-	getInitialState(){
+var CommentForm = React.createClass({
+	getInitialState: function(){
 		return {author: '', text: ''};
 	},
-	handleAuthorChange(e){
+	handleAuthorChange: function(e){
 		this.setState({author: e.target.value});
 	},
-	handleTextChange(e){
+	handleTextChange: function(e){
 		this.setState({text: e.target.value});
 	},
-	handleSubmit(e){
+	handleSubmit: function(e){
 		e.preventDefault();
 		var author = this.state.author.trim();
 		var text = this.state.text.trim();
@@ -21,7 +19,7 @@ var CommentForm = createClass({
 		this.setState({author: '', text: ''});
 		return;
 	},
-	render(){
+	render: function(){
 		return(
 			<form className="commentForm" onSubmit={this.handleSubmit}>
 				<div>
@@ -38,4 +36,4 @@ var CommentForm = createClass({
 	}
 });
 
-export default CommentForm;
+module.exports = CommentForm;
