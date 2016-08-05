@@ -29,4 +29,4 @@ module.exports = {
 		new webpack.optimize.UglifyJsPlugin(),
 		new ExtractTextPlugin('style.css')
 	]
-}
+};

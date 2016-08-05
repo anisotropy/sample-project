@@ -26,4 +26,4 @@ module.exports = {
 		}),
 		new webpack.ProvidePlugin(config.globalModules)
 	]
-}
+};
