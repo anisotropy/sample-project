@@ -1,13 +1,8 @@
 var entry = [
-	'/app/content.js'
+	'/app/App.js'
 ];
 
 var globalModules = {
-	$: 'jquery',
-	jQuery: 'jquery',
-	React: 'react',
-	ReactDOM: 'react-dom',
-	Contrib: __dirname+'/app/contrib.js'
 };
 
 module.exports = {

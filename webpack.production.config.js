@@ -12,7 +12,7 @@ module.exports = {
 	module: {
 		loaders: [
 			{ test: /\.json$/, loader: 'json' },
-			{ test: /\.js$/, exclude: /node_modules/, loader: 'babel', query: { presets: ['react'] }},
+			{ test: /\.js$/, exclude: /node_modules/, loader: 'babel', query: { presets: ['react', 'es2015'] }},
 			{ test: /\.less$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!less') },
 			{ test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader') }
 		]

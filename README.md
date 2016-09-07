@@ -3,9 +3,10 @@
 
 # 특징
 * React
+* es2015(es6)
 * jQuery
 * Less loader
-* Json loader
+* JSON loader
 
 ## 참고한 자료
 * [Webpack for reack](http://www.pro-react.com/materials/appendixA/)
