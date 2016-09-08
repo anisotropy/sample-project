@@ -18,8 +18,9 @@
 	"tasks": []
 }, {
 	"id": 3,
-	"title": "Card Three title",
+	"title": "Study PropTypes",
 	"description": "Card detailed description",
+	"color": "#58ACFA",
 	"status": "done",
 	"tasks": []
 }]

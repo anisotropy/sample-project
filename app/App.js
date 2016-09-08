@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import cardsList from './cardsList.json';
-import KanbanBorad from './KanbanBorad.js';
+import contacts from './contacts.json';
+import KanbanBorad from './KanbanBorad';
+import ContactsApp from './ContactsApp';
 import './style.less';
 
-render(<KanbanBorad cards={ cardsList } />, document.getElementById('main'));
+render(
+	<div>
+		<KanbanBorad cards={cardsList} />
+		<ContactsApp contacts={contacts} />
+	</div>,
+	document.getElementById('root')
+);
