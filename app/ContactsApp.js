@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import {polyfill} from 'es6-promise';
 import 'whatwg-fetch';
 
 class ContactsAppContainer extends Component {
