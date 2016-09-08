@@ -1,4 +1,27 @@
 import React, {Component, PropTypes} from 'react';
+import 'whatwg-fetch';
+
+class ContactsAppContainer extends Component {
+	constructor(){
+		super();
+		this.state = {
+			contacts: []
+		};
+	}
+	componentDidMount(){
+		fetch('../data/contacts.json')
+		.then((response) => response.json())
+		.then((responseData) => {
+			this.setState({ contacts: responseData })
+		})
+		.catch((error) => {
+			console.log('Error fetching and parsing data', error);
+		});
+	}
+	render(){
+		return <ContactsApp contacts={this.state.contacts} />
+	}
+}
 
 class ContactsApp extends Component {
 	constructor(){
@@ -61,4 +84,4 @@ ContactItem.propTypes = {
 	email: PropTypes.string.isRequired
 };
 
-export default ContactsApp;
+export default ContactsAppContainer;
