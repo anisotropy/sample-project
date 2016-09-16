@@ -16,14 +16,14 @@ class CardApi {
 		}
 	}
 	private function delete($request){
-		if(count($request) % 2 == 0) return;
+		if(count($request) % 2 == 0){ echo http_response_code(400); return; }
 		$walk = $this->cardWalk($request);
-		array_splice($walk['pre'], $walk['index'], 1);
+		array_splice($walk['prev'], $walk['index'], 1);
 		$this->write();
 		echo $this->json(array('ok' => true));
 	}
 	private function put($request, $body){
-		if(count($request) % 2 == 0) return;
+		if(count($request) % 2 == 0){ echo http_response_code(400); return; }
 		$walk = $this->cardWalk($request);
 		foreach($body as $key => $value){
 			$walk['cur'][$key] = $value;
@@ -32,7 +32,7 @@ class CardApi {
 		echo $this->json(array('ok' => true));
 	}
 	private function post($request, $body){
-		if(count($request) % 2 == 1) return;
+		if(count($request) % 2 == 1){ echo http_response_code(400); return; }
 		$walk = $this->cardWalk($request);
 		$id = $walk['cur'][count($walk['cur'])-1]['id'] + 1;
 		$body['id'] = $id;
@@ -60,7 +60,7 @@ class CardApi {
 				}
 			}
 		}
-		return array('cur' => &$walk, 'pre' => &$preWalk, 'index' => $index);
+		return array('cur' => &$walk, 'prev' => &$preWalk, 'index' => $index);
 	}
 	private function read(){
 		return @file_get_contents($this->cardDataPath);

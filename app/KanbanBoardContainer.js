@@ -21,10 +21,11 @@ class KanbanBoardContainer extends Component {
 			this.setState({ cards: responseData })
 		})
 		.catch((error) => {
-			console.error('Error fetching and parsing data --', error);
+			console.error(error);
 		});
 	}
 	addTask(cardId, taskName){
+		let prevState = this.state;
 		let cardIndex = this.state.cards.findIndex((card) => card.id == cardId);
 		let newTask = {
 			id: Date.now(),
@@ -41,13 +42,24 @@ class KanbanBoardContainer extends Component {
 			method: 'post',
 			body: JSON.stringify(newTask)
 		})
-		.then((response) => response.json())
+		.then((response) => {
+			if(response.ok){
+				return response.json();
+			} else {
+				throw new Error('Server response was not OK');
+			}
+		})
 		.then((responseData) => {
 			newTask.id = responseData.id;
 			this.setState({ cards: newState });
+		})
+		.catch((error) => {
+			console.error(error);
+			this.setState(prevState);
 		});
 	}
 	deleteTask(cardId, taskId, taskIndex){
+		let prevState = this.state;
 		let cardIndex = this.state.cards.findIndex((card) => card.id == cardId);
 		let nextState = update(this.state.cards, {
 			[cardIndex]: {
@@ -58,14 +70,19 @@ class KanbanBoardContainer extends Component {
 		fetch(`${API_URL}/cards/${cardId}/tasks/${taskId}`, {
 			method: 'delete'
 		})
-		.then((response) => response.json())
-		.then((responseData) => {})
+		.then((response) => {
+			if(!response.ok){
+				throw new Error('Server response was not OK');
+			}
+		})
 		.catch((error) => {
-			console.error('Error fetching and parsing data --', error);
+			console.error(error);
+			this.setState(prevState);
 		});
 
 	}
 	toggleTask(cardId, taskId, taskIndex){
+		let prevState = this.state;
 		let cardIndex = this.state.cards.findIndex((card) => cardId == card.id);
 		let newDoneValue;
 		let nextState = update(this.state.cards, {
@@ -85,10 +102,14 @@ class KanbanBoardContainer extends Component {
 			method: 'put',
 			body: JSON.stringify({ done: newDoneValue })
 		})
-		.then((response) => response.json())
-		.then((responseData) => {})
+		.then((response) => {
+			if(!response.ok){
+				throw new Error('Server response was not OK');
+			}
+		})
 		.catch((error) => {
-			console.error('Error fetching and parsing data --', error);
+			console.error(error);
+			this.setState(prevState);
 		});
 	}
 	render(){
