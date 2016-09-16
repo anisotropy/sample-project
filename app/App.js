@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import KanbanBoradContainer from './KanbanBoradContainer';
+import KanbanBoardContainer from './KanbanBoardContainer';
 import ContactsAppContainer from './ContactsApp';
 import './style.less';
 
 render(
 	<div>
-		<KanbanBoradContainer />
+		<KanbanBoardContainer />
 		<ContactsAppContainer />
 	</div>,
 	document.getElementById('root')

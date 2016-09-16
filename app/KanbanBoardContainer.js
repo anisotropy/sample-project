@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import update from 'react-addons-update';
-import KanbanBorad from './KanbanBorad'
+import KanbanBoard from './KanbanBoard'
 import {polyfill} from 'es6-promise';
 import 'whatwg-fetch';
 import 'babel-polyfill';
 
 const API_URL = '../api';
 
-class KanbanBoradContainer extends Component {
+class KanbanBoardContainer extends Component {
 	constructor(){
 		super();
 		this.state = {
@@ -45,7 +45,7 @@ class KanbanBoradContainer extends Component {
 	}
 	render(){
 		return (
-			<KanbanBorad
+			<KanbanBoard
 				cards={this.state.cards}
 				taskCallbacks={{
 					toggle: this.toggleTask.bind(this),
@@ -57,4 +57,4 @@ class KanbanBoradContainer extends Component {
 	}
 }
 
-export default KanbanBoradContainer;
+export default KanbanBoardContainer;
