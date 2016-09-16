@@ -37,7 +37,7 @@ class KanbanBoardContainer extends Component {
 			}
 		});
 		this.setState({ cards: newState });
-		fetch(`${API_URL}/cards/${cardIndex}/tasks`, {
+		fetch(`${API_URL}/cards/${cardId}/tasks`, {
 			method: 'post',
 			body: JSON.stringify(newTask)
 		})
@@ -55,8 +55,13 @@ class KanbanBoardContainer extends Component {
 			}
 		});
 		this.setState({cards: nextState});
-		fetch(`${API_URL}/cards/${cardIndex}/tasks/${taskIndex}`, {
+		fetch(`${API_URL}/cards/${cardId}/tasks/${taskId}`, {
 			method: 'delete'
+		})
+		.then((response) => response.json())
+		.then((responseData) => {})
+		.catch((error) => {
+			console.error('Error fetching and parsing data --', error);
 		});
 
 	}
@@ -76,9 +81,14 @@ class KanbanBoardContainer extends Component {
 			}
 		});
 		this.setState({ cards: nextState });
-		fetch(`${API_URL}/cards/${cardIndex}/tasks/${taskIndex}`, {
+		fetch(`${API_URL}/cards/${cardId}/tasks/${taskId}`, {
 			method: 'put',
 			body: JSON.stringify({ done: newDoneValue })
+		})
+		.then((response) => response.json())
+		.then((responseData) => {})
+		.catch((error) => {
+			console.error('Error fetching and parsing data --', error);
 		});
 	}
 	render(){

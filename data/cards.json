@@ -8,17 +8,17 @@
         "tasks": [
             {
                 "id": 1,
-                "name": "ContactList Example",
+                "name": "1st task",
                 "done": true
             },
             {
                 "id": 2,
-                "name": "Kanban Example",
-                "done": true
+                "name": "2nd task",
+                "done": false
             },
             {
                 "id": 3,
-                "name": "Additional Task",
+                "name": "3rd task",
                 "done": true
             }
         ]

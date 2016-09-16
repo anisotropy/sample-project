@@ -16,41 +16,51 @@ class CardApi {
 		}
 	}
 	private function delete($request){
-		$walk = &$this->cards;
-		$count = count($request);
-		for($i = 0; $i <= $count-2; $i++){
-			$walk = &$walk[$request[$i]];
-		}
-		$lastKey = $request[$count-1];
-		if(is_numeric($lastKey)){
-			array_splice($walk, $lastKey, 1);
-		} else {
-			unset($walk[$lastKey]);
-		}
+		if(count($request) % 2 == 0) return;
+		$walk = $this->cardWalk($request);
+		array_splice($walk['pre'], $walk['index'], 1);
 		$this->write();
+		echo $this->json(array('ok' => true));
 	}
 	private function put($request, $body){
-		$walk = &$this->cards;
-		$count = count($request);
-		for($i = 0; $i <= $count-1; $i++){
-			$walk = &$walk[$request[$i]];
-		}
+		if(count($request) % 2 == 0) return;
+		$walk = $this->cardWalk($request);
 		foreach($body as $key => $value){
-			$walk[$key] = $value;
+			$walk['cur'][$key] = $value;
 		}
 		$this->write();
+		echo $this->json(array('ok' => true));
 	}
 	private function post($request, $body){
-		$walk = &$this->cards;
-		$count = count($request);
-		for($i = 0; $i <= $count-1; $i++){
-			$walk = &$walk[$request[$i]];
-		}
-		$id = $walk[count($walk)-1]['id'] + 1;
+		if(count($request) % 2 == 1) return;
+		$walk = $this->cardWalk($request);
+		$id = $walk['cur'][count($walk['cur'])-1]['id'] + 1;
 		$body['id'] = $id;
-		array_push($walk, $body);
+		array_push($walk['cur'], $body);
 		$this->write();
 		echo $this->json(array('id' => $id));
+	}
+	private function cardWalk($request){
+		$walk = &$this->cards;
+		$preWalk = &$this->cards;
+		$index;
+		for($i = 0, $ic = count($request); $i < $ic; $i++){
+			if($i % 2){
+				$preWalk = &$walk;
+				$index = $request[$i];
+				$walk = &$walk[$request[$i]];
+			} else {
+				for($j = 0, $jc = count($walk); $j < $jc; $j++){
+					if($walk[$j]['id'] == $request[$i]){
+						$preWalk = &$walk;
+						$index = $j;
+						$walk = &$walk[$j];
+						break;
+					}
+				}
+			}
+		}
+		return array('cur' => &$walk, 'pre' => &$preWalk, 'index' => $index);
 	}
 	private function read(){
 		return @file_get_contents($this->cardDataPath);
