@@ -14,12 +14,7 @@
             {
                 "id": 2,
                 "name": "Kanban Example",
-                "done": false
-            },
-            {
-                "id": 3,
-                "name": "My own experiments",
-                "done": false
+                "done": true
             }
         ]
     },
