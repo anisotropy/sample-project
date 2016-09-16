@@ -25,7 +25,27 @@ class KanbanBoardContainer extends Component {
 		});
 	}
 	addTask(cardId, taskName){
-		//let cardIndex = this.state.cards.findIndex((card) => card.id == cardId);
+		let cardIndex = this.state.cards.findIndex((card) => card.id == cardId);
+		let newTask = {
+			id: Date.now(),
+			name: taskName,
+			done: false
+		}
+		let newState = update(this.state.cards, {
+			[cardIndex]: {
+				tasks: { $push: [newTask] }
+			}
+		});
+		this.setState({ cards: newState });
+		fetch(`${API_URL}/cards/${cardIndex}/tasks`, {
+			method: 'post',
+			body: JSON.stringify(newTask)
+		})
+		.then((response) => response.json())
+		.then((responseData) => {
+			newTask.id = responseData.id;
+			this.setState({ cards: newState });
+		});
 	}
 	deleteTask(cardId, taskId, taskIndex){
 		let cardIndex = this.state.cards.findIndex((card) => card.id == cardId);

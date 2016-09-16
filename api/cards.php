@@ -12,12 +12,13 @@ class CardApi {
 			case 'GET': echo $this->read(); break;
 			case 'DELETE': $this->delete($request); break;
 			case 'PUT': $this->put($request, $body); break;
+			case 'POST': $this->post($request, $body); break;
 		}
 	}
 	private function delete($request){
 		$walk = &$this->cards;
 		$count = count($request);
-		for($i = 0; $i <= $count-2; $i++ ){
+		for($i = 0; $i <= $count-2; $i++){
 			$walk = &$walk[$request[$i]];
 		}
 		$lastKey = $request[$count-1];
@@ -31,13 +32,25 @@ class CardApi {
 	private function put($request, $body){
 		$walk = &$this->cards;
 		$count = count($request);
-		for($i = 0; $i <= $count-1; $i++ ){
+		for($i = 0; $i <= $count-1; $i++){
 			$walk = &$walk[$request[$i]];
 		}
 		foreach($body as $key => $value){
 			$walk[$key] = $value;
 		}
 		$this->write();
+	}
+	private function post($request, $body){
+		$walk = &$this->cards;
+		$count = count($request);
+		for($i = 0; $i <= $count-1; $i++){
+			$walk = &$walk[$request[$i]];
+		}
+		$id = $walk[count($walk)-1]['id'] + 1;
+		$body['id'] = $id;
+		array_push($walk, $body);
+		$this->write();
+		echo $this->json(array('id' => $id));
 	}
 	private function read(){
 		return @file_get_contents($this->cardDataPath);
