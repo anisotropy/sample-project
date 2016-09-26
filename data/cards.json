@@ -19,7 +19,7 @@
             {
                 "id": 3,
                 "name": "3rd task",
-                "done": true
+                "done": false
             },
             {
                 "id": 4,
@@ -29,7 +29,7 @@
             {
                 "id": 5,
                 "name": "5th task",
-                "done": true
+                "done": false
             }
         ]
     },

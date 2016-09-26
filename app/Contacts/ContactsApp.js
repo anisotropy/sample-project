@@ -36,7 +36,7 @@ class ContactsApp extends Component {
 	}
 	render(){
 		return(
-			<div>
+			<div id="contacts-app">
 				<SearchBar filterText={this.state.filterText} onUserInput={this.handleUserInput.bind(this)} />
 				<ContactList contacts={this.props.contacts} filterText={this.state.filterText} />
 			</div>

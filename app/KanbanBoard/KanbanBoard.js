@@ -4,7 +4,7 @@ import List from './List.js';
 class KanbanBoard extends Component {
 	render(){
 		return (
-			<div className="app">
+			<div id="kanban-board">
 				<List id="todo" title="To Do"
 					cards={this.props.cards.filter((card) => card.status === 'todo')}
 					taskCallbacks = {this.props.taskCallbacks}

@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import update from 'react-addons-update';
 import KanbanBoard from './KanbanBoard'
-import {polyfill} from 'es6-promise';
-import 'whatwg-fetch';
-import 'babel-polyfill';
+import {polyfill} from 'es6-promise'; // for fetch()
+import 'whatwg-fetch'; // for fetch()
+import 'babel-polyfill'; // for update() ...
 
 const API_URL = '../api';
 
